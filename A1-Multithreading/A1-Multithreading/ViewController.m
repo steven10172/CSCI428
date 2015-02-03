@@ -19,16 +19,48 @@
     [super viewDidLoad];
 
     self.isRunning = false;
-    self.largestNumberToCheck = 5000; //50000
     
     // Init to current value of the slider
     self.numThreads = [self.slider_numThreads value];
+    
+    // Init to current value of the slider
+    self.largestNumberToCheck = [self.slider_maxInt value];
     
     // Init the Dict of results
     self.primesFound = [[NSMutableDictionary alloc] init];
     
     // Display the table with the data
     [self reloadTable];
+    
+    [self showTime];
+}
+
+- (void)showTime {
+    // Get Current Global Queue
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    // Get Current UI Queue
+    dispatch_queue_t main_queue = dispatch_get_main_queue();
+    
+    // Dispatch a thread to keep updating the time
+    dispatch_async(queue, ^{
+        // Wait for all threads to finish
+        while (true) {
+            [NSThread sleepForTimeInterval:1.0];
+            dispatch_async(main_queue, ^{
+                // Update UI with time
+                NSDate *currentTime = [NSDate date];
+                
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"hh:mm:ss a"];
+                
+                NSString *stringFromDate = [formatter stringFromDate:currentTime];
+                
+                // Display Time elapsed
+                self.lbl_currentTime.text = stringFromDate;
+            });
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +103,18 @@
 }
 
 - (void)runSearch {
+    // Clear the results
+    // Set the status label
+    self.lbl_currentTestStatus.text = @"No Tests Run";
+    
+    // Clear the primes found
+    [self.primesFound removeAllObjects];
+    
+    // Reload the Table data to show empty
+    [self reloadTable];
+    
+    
+    
     // Set the current status of the search as running
     self.isRunning = true;
     
@@ -234,8 +278,8 @@
     [self reloadTable];
 }
 
-// Called when the slider value changes
-- (IBAction)sliderValueChanged:(id)sender {
+// Called when the thread slider value changes
+- (IBAction)threadSliderValueChanged:(id)sender {
     // Get an instance of the slider
     UISlider *slider = (UISlider *)sender;
     
@@ -245,6 +289,20 @@
     // Set the label to the current value
     self.lbl_numThreads.text = [NSString stringWithFormat:@"%ld",(long)self.numThreads];
 }
+
+
+// Called when the thread slider value changes
+- (IBAction)maxIntSliderValueChanged:(id)sender {
+    // Get an instance of the slider
+    UISlider *slider = (UISlider *)sender;
+    
+    // Get the value of the current slider
+    self.largestNumberToCheck = (NSInteger)lround(slider.value);
+    
+    // Set the label to the current value
+    self.lbl_maxInt.text = [NSString stringWithFormat:@"%ld",(long)self.largestNumberToCheck];
+}
+
 
 
 

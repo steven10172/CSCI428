@@ -13,6 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tbl_results; // Create reference to result table
 @property (weak, nonatomic) IBOutlet UISlider *slider_numThreads; // Create reference to slider of number of threads
+@property (weak, nonatomic) IBOutlet UISlider *slider_maxInt; // Create reference to slider of Max Int to check
+
 
 @property NSInteger largestNumberToCheck; // Largest Number to check if it's prime
 @property NSInteger numThreads; // Number of threads the user has picked
@@ -26,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl_numThreads;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_currentTestStatus;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_runTime;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_maxInt;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_currentTime;
 
 // Reference to the Run and Stop button on the bottom of the page
 @property (weak, nonatomic) IBOutlet UIButton *btn_runTest;
@@ -35,6 +39,7 @@
 
 
 // Custom Methods
+- (void)showTime; // Puts the current time into the appropriate field every second
 - (void)stopSearch; // Stop the current search
 - (void)runSearch; // Start a new prime search
 - (void)reloadTable; // Reload the table with the new data
@@ -43,7 +48,8 @@
 
 - (IBAction)findPrimes:(id)sender;
 - (IBAction)clearResults:(id)sender;
-- (IBAction)sliderValueChanged:(id)sender;
+- (IBAction)threadSliderValueChanged:(id)sender;
+- (IBAction)maxIntSliderValueChanged:(id)sender;
 
 @end
 
