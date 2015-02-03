@@ -14,6 +14,7 @@
 		280DA1431A7EF33F00EE19D9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 280DA1421A7EF33F00EE19D9 /* Images.xcassets */; };
 		280DA1461A7EF33F00EE19D9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280DA1441A7EF33F00EE19D9 /* LaunchScreen.xib */; };
 		280DA1521A7EF34000EE19D9 /* A1_MultithreadingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 280DA1511A7EF34000EE19D9 /* A1_MultithreadingTests.m */; };
+		287D09E81A80376E00EF6760 /* ResultsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D09E71A80376E00EF6760 /* ResultsViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		280DA14B1A7EF34000EE19D9 /* A1-MultithreadingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "A1-MultithreadingTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		280DA1501A7EF34000EE19D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		280DA1511A7EF34000EE19D9 /* A1_MultithreadingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = A1_MultithreadingTests.m; sourceTree = "<group>"; };
+		287D09E61A80376E00EF6760 /* ResultsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewCell.h; sourceTree = "<group>"; };
+		287D09E71A80376E00EF6760 /* ResultsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 		280DA1341A7EF33F00EE19D9 /* A1-Multithreading */ = {
 			isa = PBXGroup;
 			children = (
+				287D09E61A80376E00EF6760 /* ResultsViewCell.h */,
+				287D09E71A80376E00EF6760 /* ResultsViewCell.m */,
 				280DA1391A7EF33F00EE19D9 /* AppDelegate.h */,
 				280DA13A1A7EF33F00EE19D9 /* AppDelegate.m */,
 				280DA13C1A7EF33F00EE19D9 /* ViewController.h */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				280DA13E1A7EF33F00EE19D9 /* ViewController.m in Sources */,
+				287D09E81A80376E00EF6760 /* ResultsViewCell.m in Sources */,
 				280DA13B1A7EF33F00EE19D9 /* AppDelegate.m in Sources */,
 				280DA1381A7EF33F00EE19D9 /* main.m in Sources */,
 			);
@@ -412,6 +418,7 @@
 				280DA1571A7EF34000EE19D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		280DA1581A7EF34000EE19D9 /* Build configuration list for PBXNativeTarget "A1-MultithreadingTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +427,7 @@
 				280DA15A1A7EF34000EE19D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

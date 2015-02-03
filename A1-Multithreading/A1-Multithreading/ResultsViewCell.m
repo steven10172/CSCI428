@@ -1,14 +1,14 @@
 //
-//  AttractionViewCell.m
-//  SBriceTopTenSydney
+//  ResultsViewCell.m
+//  A1-Multithreading
 //
 //  Created by Samantha Yonan on 2/1/15.
 //  Copyright (c) 2015 Steven Brice. All rights reserved.
 //
 
-#import "AttractionViewCell.h"
+#import "ResultsViewCell.h"
 
-@implementation AttractionViewCell
+@implementation ResultsViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
