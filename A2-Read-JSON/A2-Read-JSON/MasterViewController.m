@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Steven Brice. All rights reserved.
 //
 
+// Set the client URL
 #define clientListURL [NSURL URLWithString:@"http://www.seasite.niu.edu/cs680Android/JSON/Client_list_json.txt"]
 
 #import "MasterViewController.h"
@@ -34,7 +35,7 @@
     // Get Current Global Queue
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
-    // Dispatch a thread to keep updating the time
+    // Dispatch a thread to download the data
     dispatch_async(queue, ^{
         NSData* data = [NSData dataWithContentsOfURL:
                         clientListURL];
@@ -52,10 +53,14 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        // Get the client that was clicked
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSDictionary *client = self.clients[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        
+        // Send the client data to the detailview
         [controller setDetailItem:client];
+
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
@@ -72,10 +77,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Get the client
     NSDictionary* client = [self.clients objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Client" forIndexPath:indexPath];
     
+    // Put the client Name and Profession into the table
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [client objectForKey:@"name"]];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [client objectForKey:@"profession"]];
 
@@ -89,13 +96,14 @@
 
 
 - (void)fetchedData:(NSData *)responseData {
-    //parse out the json data
+    // Parse the JSON Data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     
+    // Set the clients from the json data
     self.clients = [json objectForKey:@"clients"];
     
-    // Reload the Table data to show empty
+    // Reload the Table data to show the downloaded client data
     [self.tbl_clients reloadData];
 }
 

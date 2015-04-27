@@ -12,7 +12,7 @@
 
 @interface MasterViewController : UITableViewController
 
-@property NSArray *clients; // Array of Prime numbers to display in the table
+@property NSArray *clients; // Array of Clients to display in the table
 
 
 @property (strong, nonatomic) DetailViewController *detailViewController;

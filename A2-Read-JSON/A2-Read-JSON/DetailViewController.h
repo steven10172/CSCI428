@@ -10,9 +10,9 @@
 
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) id detailItem;
-@property (strong, nonatomic) NSDictionary* client;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) id detailItem; // Passed object of Client Data
+@property (strong, nonatomic) NSDictionary* client; // Client Data
+
 @property (weak, nonatomic) IBOutlet UINavigationItem *detailTitle;
 @property (weak, nonatomic) IBOutlet UILabel *profession;
 @property (weak, nonatomic) IBOutlet UILabel *dob;
