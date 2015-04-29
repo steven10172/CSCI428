@@ -11,6 +11,7 @@
 
 @interface ViewController : UIViewController
 
+@property WhiteBoard *board;
 
 
 @end

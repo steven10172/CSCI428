@@ -17,8 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    WhiteBoard *board = [[WhiteBoard alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:board];
+    // Create a new instance of the WhiteBoard with the bounces of the current view
+    self.board = [[WhiteBoard alloc] initWithFrame:self.view.bounds];
+    
+    // Add the WhiteBoard as a subview of the current view
+    [self.view addSubview:self.board];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Welcome"
+                                                    message:@"Touch anywhere to draw"
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning {
