@@ -15,9 +15,10 @@
 @interface WhiteBoard : UIView
 
 @property double hue;
-@property UITouch* touch;
 @property void* cacheBitmap;
 @property CGContextRef cacheContext;
+
+-(void) downloadImage;
 
 @end
 
