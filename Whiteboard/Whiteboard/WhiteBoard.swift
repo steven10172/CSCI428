@@ -47,8 +47,9 @@ class WhiteBoard: UIView {
     
     func addHandlers() {
         self.socket.on("d") {[weak self] data, ack in
-            if(let jData = data?[0] as? String) {
-                let drawData = NSJSONSerialization.JSONObjectWithData(jData, options: nil, error: &error) as NSDictionary
+            if let jData = data?[0] as? NSData {
+                var error: NSError?
+                let drawData = NSJSONSerialization.JSONObjectWithData(jData, options: nil, error: &error) as! NSDictionary
                 NSLog("%@", drawData);
                 //self?.drawLine(name, coord: (x, y));
             }
@@ -65,14 +66,14 @@ class WhiteBoard: UIView {
     
     func initContext(frame: CGRect)-> Bool {
         let size = frame.size; // Get the size of the UIView
-        var bitmapByteCount: UInt!
-        var bitmapBytesPerRow: UInt!
+        var bitmapByteCount: Int!
+        var bitmapBytesPerRow: Int!
         
         // Calculate the number of bytes per row. 4 bytes per pixel: red, green, blue, alpha
-        bitmapBytesPerRow = UInt(size.width * 4);
+        bitmapBytesPerRow = Int(size.width * 4);
         
         // Total Bytes in the bitmap
-        bitmapByteCount = UInt(CGFloat(bitmapBytesPerRow) * size.height);
+        bitmapByteCount = Int(CGFloat(bitmapBytesPerRow) * size.height);
         
         // Allocate memory for image data. This is the destination in memory where any
         // drawing to the bitmap context will be rendered
@@ -80,7 +81,7 @@ class WhiteBoard: UIView {
         
         
         // Create the Cache Context from the Bitmap
-        self.cacheContext = CGBitmapContextCreate(self.cacheBitmap!, UInt(size.width), UInt(size.height), 8, bitmapBytesPerRow, CGColorSpaceCreateDeviceRGB(), CGBitmapInfo(CGImageAlphaInfo.NoneSkipFirst.rawValue));
+        self.cacheContext = CGBitmapContextCreate(self.cacheBitmap!, Int(size.width), Int(size.height), 8, bitmapBytesPerRow, CGColorSpaceCreateDeviceRGB(), CGBitmapInfo(CGImageAlphaInfo.NoneSkipFirst.rawValue));
         
         // Set the background as white
         CGContextSetRGBFillColor(self.cacheContext, 1.0, 1.0, 1.0, 1.0);
@@ -91,12 +92,12 @@ class WhiteBoard: UIView {
     }
     
     // Fired everytime a touch event is dragged
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        let touch = touches.anyObject() as UITouch;
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch = touches.first as? UITouch;
         
         //self.socket.emit("d", nil);
         
-        self.drawToCache(touch);
+        self.drawToCache(touch!);
     }
     
     // Draw the new touch event to the cached Bitmap
