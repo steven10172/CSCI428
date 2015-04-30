@@ -20,6 +20,8 @@
 		20236B631AF1A1B100456701 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20236B561AF1A1B100456701 /* SocketTypes.swift */; };
 		20236B641AF1A1B100456701 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20236B571AF1A1B100456701 /* SwiftRegex.swift */; };
 		20236B651AF1A1B100456701 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20236B581AF1A1B100456701 /* WebSocket.swift */; };
+		2066E0B71AF1BBDD00D40090 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066E0B61AF1BBDD00D40090 /* UIColorExtension.swift */; };
+		2066E0B91AF1D3FF00D40090 /* DrawingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066E0B81AF1D3FF00D40090 /* DrawingEvent.swift */; };
 		2073AD8B1AF0B7C900D111FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2073AD8A1AF0B7C900D111FA /* AppDelegate.swift */; };
 		2073AD8D1AF0B7C900D111FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2073AD8C1AF0B7C900D111FA /* ViewController.swift */; };
 		2073AD901AF0B7C900D111FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2073AD8E1AF0B7C900D111FA /* Main.storyboard */; };
@@ -53,6 +55,8 @@
 		20236B561AF1A1B100456701 /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
 		20236B571AF1A1B100456701 /* SwiftRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRegex.swift; sourceTree = "<group>"; };
 		20236B581AF1A1B100456701 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		2066E0B61AF1BBDD00D40090 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		2066E0B81AF1D3FF00D40090 /* DrawingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingEvent.swift; sourceTree = "<group>"; };
 		2073AD851AF0B7C900D111FA /* Whiteboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whiteboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2073AD891AF0B7C900D111FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2073AD8A1AF0B7C900D111FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 				2073AD8A1AF0B7C900D111FA /* AppDelegate.swift */,
 				2073AD8C1AF0B7C900D111FA /* ViewController.swift */,
 				2073ADAA1AF0B88C00D111FA /* WhiteBoard.swift */,
+				2066E0B61AF1BBDD00D40090 /* UIColorExtension.swift */,
+				2066E0B81AF1D3FF00D40090 /* DrawingEvent.swift */,
 				2073AD8E1AF0B7C900D111FA /* Main.storyboard */,
 				2073AD911AF0B7C900D111FA /* Images.xcassets */,
 				2073AD931AF0B7C900D111FA /* LaunchScreen.xib */,
@@ -262,8 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2066E0B71AF1BBDD00D40090 /* UIColorExtension.swift in Sources */,
 				20236B621AF1A1B100456701 /* SocketParser.swift in Sources */,
 				20236B651AF1A1B100456701 /* WebSocket.swift in Sources */,
+				2066E0B91AF1D3FF00D40090 /* DrawingEvent.swift in Sources */,
 				20236B5E1AF1A1B100456701 /* SocketFixUTF8.swift in Sources */,
 				20236B641AF1A1B100456701 /* SwiftRegex.swift in Sources */,
 				20236B5C1AF1A1B100456701 /* SocketEngineClient.swift in Sources */,
