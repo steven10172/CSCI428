@@ -14,7 +14,7 @@
 		2B25B6A11AF2E5210028001D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B25B6A01AF2E5210028001D /* Images.xcassets */; };
 		2B25B6A41AF2E5210028001D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B25B6A21AF2E5210028001D /* LaunchScreen.xib */; };
 		2B25B6B01AF2E5210028001D /* A5_Download_ImagesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B25B6AF1AF2E5210028001D /* A5_Download_ImagesTests.m */; };
-		2B71BEEB1AF3260500012E9C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B71BEEA1AF3260500012E9C /* DetailViewController.m */; };
+		2BC1C3F51AF353FD003B38F4 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1C3F41AF353FD003B38F4 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +41,8 @@
 		2B25B6A91AF2E5210028001D /* A5-Download-ImagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "A5-Download-ImagesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B25B6AE1AF2E5210028001D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B25B6AF1AF2E5210028001D /* A5_Download_ImagesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = A5_Download_ImagesTests.m; sourceTree = "<group>"; };
-		2B71BEE91AF3260500012E9C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = "../../A2-Read-JSON/A2-Read-JSON/DetailViewController.h"; sourceTree = "<group>"; };
-		2B71BEEA1AF3260500012E9C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = "../../A2-Read-JSON/A2-Read-JSON/DetailViewController.m"; sourceTree = "<group>"; };
+		2BC1C3F31AF353FD003B38F4 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		2BC1C3F41AF353FD003B38F4 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +86,10 @@
 			children = (
 				2B25B6971AF2E5210028001D /* AppDelegate.h */,
 				2B25B6981AF2E5210028001D /* AppDelegate.m */,
-				2B71BEE91AF3260500012E9C /* DetailViewController.h */,
-				2B71BEEA1AF3260500012E9C /* DetailViewController.m */,
 				2B25B69A1AF2E5210028001D /* ViewController.h */,
 				2B25B69B1AF2E5210028001D /* ViewController.m */,
+				2BC1C3F31AF353FD003B38F4 /* DetailViewController.h */,
+				2BC1C3F41AF353FD003B38F4 /* DetailViewController.m */,
 				2B25B69D1AF2E5210028001D /* Main.storyboard */,
 				2B25B6A01AF2E5210028001D /* Images.xcassets */,
 				2B25B6A21AF2E5210028001D /* LaunchScreen.xib */,
@@ -227,7 +227,7 @@
 				2B25B69C1AF2E5210028001D /* ViewController.m in Sources */,
 				2B25B6991AF2E5210028001D /* AppDelegate.m in Sources */,
 				2B25B6961AF2E5210028001D /* main.m in Sources */,
-				2B71BEEB1AF3260500012E9C /* DetailViewController.m in Sources */,
+				2BC1C3F51AF353FD003B38F4 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
