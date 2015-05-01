@@ -19,7 +19,11 @@
 - (void)setDetailItem:(id)newDetailItem {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
-            
+        
+        NSDictionary *details = newDetailItem;
+        self.urlAddr = [details objectForKey:@"url"];
+        self.name = [details objectForKey:@"name"];
+
         // Update the view.
         [self configureView];
     }
@@ -27,9 +31,12 @@
 
 - (void)configureView {
     // Update the user interface for the detail item.
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
-    }
+    
+    self.navigationItem.title = self.name;
+    
+    NSURL *url = [NSURL URLWithString:self.urlAddr];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:requestObj];
 }
 
 - (void)viewDidLoad {

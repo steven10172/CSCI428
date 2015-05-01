@@ -8,7 +8,11 @@
 
 // Set the client URL
 #define artistSearchURL @"http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=%SEARCH_TERM%&api_key=9e740cfebf2019e84fbf957b3bd3528c&format=json"
+
 #define albumSearchURL @"http://ws.audioscrobbler.com/2.0/?method=album.search&album=%SEARCH_TERM%&api_key=9e740cfebf2019e84fbf957b3bd3528c&format=json"
+
+
+#define trackSearchURL @"http://ws.audioscrobbler.com/2.0/?method=track.search&track=%SEARCH_TERM%&api_key=9e740cfebf2019e84fbf957b3bd3528c&format=json"
 
 
 #import "MasterViewController.h"
@@ -42,8 +46,9 @@
         // Clear the results
         self.apiResultsArray = [[NSArray alloc] init];
         
-        //[self searchArtists];
+        [self searchArtists];
         [self searchAlbums];
+        [self searchTrack];
     }
 }
 
@@ -72,6 +77,21 @@
         NSURL *url = [NSURL URLWithString:urlString];
         NSData* data = [NSData dataWithContentsOfURL:url];
         [self performSelectorOnMainThread:@selector(fetchedDataAlbum:)
+                               withObject:data waitUntilDone:YES];
+    });
+}
+
+
+- (void)searchTrack {
+    // Get Current Global Queue
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    // Dispatch a thread to download the data
+    dispatch_async(queue, ^{
+        NSString *urlString = [trackSearchURL stringByReplacingOccurrencesOfString:@"%SEARCH_TERM%" withString:self.searchTerm];
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSData* data = [NSData dataWithContentsOfURL:url];
+        [self performSelectorOnMainThread:@selector(fetchedDataTrack:)
                                withObject:data waitUntilDone:YES];
     });
 }
@@ -117,7 +137,7 @@
         if([numResults isEqualToString:@"0"]) {
             [self.tableViewData removeAllObjects];
             [self.tableView reloadData];
-
+            
             return;
         }
         NSArray *resultsArray = [[[json objectForKey:@"results"] objectForKey:@"albummatches"] objectForKey:@"album"];
@@ -136,6 +156,37 @@
     }
 }
 
+- (void)fetchedDataTrack:(NSData *)responseData {
+    if(responseData != nil) {
+        // Parse the JSON Data
+        NSError* error;
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+        
+        // Set the clients from the json data
+        NSString *numResults = [[json objectForKey:@"results"] objectForKey:@"opensearch:totalResults"];
+        if([numResults isEqualToString:@"0"]) {
+            [self.tableViewData removeAllObjects];
+            [self.tableView reloadData];
+            
+            return;
+        }
+        NSArray *resultsArray = [[[json objectForKey:@"results"] objectForKey:@"trackmatches"] objectForKey:@"track"];
+        self.apiResultsArray = [self.apiResultsArray arrayByAddingObjectsFromArray:resultsArray];
+        
+        NSLog(@"%@", resultsArray[0][@"name"]);
+        
+        // Reload the Table data to show the downloaded client data
+        [self.tableViewData removeAllObjects];
+        self.tableViewData = [self.apiResultsArray mutableCopy]; // Reload all the data from the plist into the table
+        [self sortResults];
+        [self.tableView reloadData];
+    } else {
+        [self.tableViewData removeAllObjects];
+        [self.tableView reloadData];
+    }
+}
+
+
 - (void)sortResults {
     if([self.apiResultsArray count] > 0) {
         NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -149,7 +200,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
+        NSDate *object = self.tableViewData[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
     }
 }
@@ -178,7 +229,7 @@
     
     NSString *title;
     if([results objectForKey:@"artist"] != nil) {
-        title = [NSString stringWithFormat:@"%@ - %@", [results objectForKey:@"artist"], [results objectForKey:@"name"]];
+        title = [NSString stringWithFormat:@"%@ - %@", [results objectForKey:@"name"], [results objectForKey:@"artist"]];
     } else {
         title = [NSString stringWithFormat:@"%@", [results objectForKey:@"name"]];
     }
@@ -191,51 +242,8 @@
 #pragma mark - SearchBar Delegate Methods
 // Monitor when the text changes in the searchbar
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    self.searchTerm = searchText;
+    self.searchTerm = [searchText stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     [self search];
-    //[self searchForTerm:searchText]; // Perform the search with the new text
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [searchBar resignFirstResponder]; // Remove the searchbar focus
-    self.searchBar.text = @""; // Reset the Search Bar
-    
-    // Reload the table data with the original data from the plist
-    self.tableViewData = [self.apiResultsArray mutableCopy]; // Reload all the data from the plist into the table
-    [self.tableView reloadData]; // Trigger the table to reload
-}
-
-- (void)searchForTerm:(NSString *)searchTerm {
-    
-    if(searchTerm && searchTerm.length) { // Check to see if there was a search term
-        [self.tableViewData removeAllObjects]; // Remove all data from the table
-        
-        // Loop through all the data in the array and grab each student
-        for(NSDictionary *result in self.apiResultsArray) {
-            
-            // Get the keys for each student and search them
-            for(NSString *key in [result allKeys]) {
-                
-                // If the key is one of the following search the contents for a match
-                if([key isEqualToString:@"name"]) {
-                    
-                    // Search the contents of the key for a partial match of the users search term
-                    if([[result valueForKey:key] rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location != NSNotFound) {
-                        // There was a data match
-                        // Add the student to the table to be displayed
-                        [self.tableViewData addObject:result];
-                        break;
-                    }
-                }
-            }
-        }
-        [self.tableView reloadData]; // Trigger the table to reload
-    } else {
-        // A blank term was searched for
-        // Display all the data
-        self.tableViewData = [self.apiResultsArray mutableCopy]; // Reload all the data from the plist into the table
-        [self.tableView reloadData]; // Trigger the table to reload
-    }
 }
 
 #pragma mark - ScrollView delegate methods
