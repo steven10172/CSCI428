@@ -14,10 +14,13 @@
 
 @implementation DetailViewController
 
+
 #pragma mark - Managing the detail item
 
 - (void)setURL:(NSString*)url {
     self.url = url;
+    
+    // Get the full image by removing the s at the end
     self.url = [self.url stringByReplacingOccurrencesOfString:@"s.jpg" withString:@".jpg"];
     
     // Update the view.
@@ -25,6 +28,7 @@
 }
 
 - (void)configureView {
+    // Change the image on the screen
     self.image.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.url]]];
 }
 

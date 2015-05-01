@@ -82,7 +82,7 @@
             </objects>
             <point key="canvasLocation" x="-166" y="-224"/>
         </scene>
-        <!--Image-->
+        <!--Detail View Controller-->
         <scene sceneID="ACf-Sb-YWd">
             <objects>
                 <viewController id="2PH-iu-ddG" customClass="DetailViewController" sceneMemberID="viewController">
@@ -106,8 +106,8 @@
                             <constraint firstItem="So1-gQ-2jb" firstAttribute="top" secondItem="Yok-sO-j8b" secondAttribute="bottom" id="ZvK-iM-ISb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Image" id="1oa-Vw-x4l">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="EKh-of-Gw5"/>
+                    <navigationItem key="navigationItem" id="1oa-Vw-x4l">
+                        <barButtonItem key="backBarButtonItem" title="Images" id="EKh-of-Gw5"/>
                     </navigationItem>
                     <connections>
                         <outlet property="image" destination="Yok-sO-j8b" id="R0a-gz-Ika"/>

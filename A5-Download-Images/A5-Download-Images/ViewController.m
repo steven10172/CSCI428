@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Setup the collection View cell
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     // Get Current Global Queue
@@ -36,8 +37,12 @@
     });
 }
 
+// Parse the data from the .txt file
 - (void)fetchedData:(NSData *)responseData {
+    // Turn the data to a string
     NSString *data = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    
+    // Get an array of each line in the data file
     self.imageArray = [data componentsSeparatedByString:@"\r\n"];
 
     // Reload the Table data to show the downloaded client data
@@ -50,39 +55,42 @@
 }
 
 #pragma mark - UICollectionView Datasource
-// 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    //return [self.searchResults[searchTerm] count];
+    // Return the number of Images
     return [self.imageArray count];
 }
-// 2
+
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
     return 1;
 }
-// 3
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    // Get the Cell
     UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    // Get the URL string from the array
     NSString *url = self.imageArray[indexPath.row];
+    
+    // Set the background view to a UIImageView
     cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]]];
+    
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Item was selected. prepare the Segue with the clicked index
     [self performSegueWithIdentifier:@"viewImage" sender:indexPath];
-    // TODO: Select Item
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
+    // Deselect item
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Make sure your segue name in storyboard is the same as this line
-    if ([[segue identifier] isEqualToString:@"viewImage"])
-    {
-        NSLog(@"viewImage");
+    if ([[segue identifier] isEqualToString:@"viewImage"]) {
         NSIndexPath *indexPath = sender;
         [[segue destinationViewController] setURL:self.imageArray[indexPath.row]];
     }
@@ -90,13 +98,11 @@
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
-// 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize retval = CGSizeMake(self.collectionView.frame.size.width / 3 - 35, self.collectionView.frame.size.width / 3 - 35);
     return retval;
 }
 
-// 3
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(20, 20, 20, 20);
