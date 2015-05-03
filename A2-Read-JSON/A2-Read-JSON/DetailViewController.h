@@ -10,8 +10,13 @@
 
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) NSString *url; // URL of the image
-@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (strong, nonatomic) id detailItem; // Passed object of Client Data
+@property (strong, nonatomic) NSDictionary* client; // Client Data
+
+@property (weak, nonatomic) IBOutlet UINavigationItem *detailTitle;
+@property (weak, nonatomic) IBOutlet UILabel *profession;
+@property (weak, nonatomic) IBOutlet UILabel *dob;
+@property (weak, nonatomic) IBOutlet UITextView *children;
 
 @end
 
